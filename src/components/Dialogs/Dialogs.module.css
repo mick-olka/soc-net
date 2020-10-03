@@ -1,0 +1,60 @@
+.dialogs{
+    display: grid;
+    grid-template-columns: 2fr 12fr;
+}
+
+.dialogsHeader{
+text-align: center;
+border-bottom: 2px solid grey;
+}
+
+
+
+.dialogsItems{
+    
+}
+
+.dialogsItems .active{
+}
+
+
+.dialog{
+    font-weight: bold;
+}
+
+.dialog a{
+    display: block;
+    padding: 1em;
+    text-decoration: none;
+    color: black;
+}
+
+.dialog a.activeDialog{
+    background-color: turquoise;
+}
+
+
+.messages{
+    border-left: 2px solid grey;
+}
+
+.message{
+    width: fit-content;
+    margin: 0.5em;
+    padding: 0.5em;
+    background-color: grey;
+    border-radius: 1em;
+    max-width: 50%;
+}
+
+.textInputBlock{
+    display: flex;
+    border-top: 2px solid grey;
+}
+
+.textInput{
+    resize: none;
+    overflow: auto;
+    width: 80%;
+    margin: 1em;
+}

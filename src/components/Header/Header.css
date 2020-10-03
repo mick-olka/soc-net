@@ -1,0 +1,22 @@
+.header {
+    grid-area: h;
+    background-color: green;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1em;
+}
+
+.heading {
+    margin: auto 0;
+}
+
+.logo img {
+    width: 3.5em;
+    height: 100%;
+}
+
+.search {
+    margin: auto 0;
+    height: 2em;
+    background-color: white;
+}

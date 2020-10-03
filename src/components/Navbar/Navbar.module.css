@@ -1,0 +1,24 @@
+.nav {
+    grid-area: n;
+    background-color: burlywood;
+    padding: 1em;
+}
+
+.item {
+    font-size: large;
+    margin-top: 0.5em;
+    transition: 0.5s;
+}
+
+.item a{
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.item:hover {
+    margin-left: 1em;
+}
+
+.item a.activeLink {
+    font-weight: bold;
+}
