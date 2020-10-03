@@ -1,0 +1,23 @@
+.content {
+    display: flex;
+    margin: 1em 0;
+}
+
+.info {
+    margin-left: 1em;
+}
+
+.profile_name {
+    font-size: larger;
+    font-weight: bold;
+}
+
+.avatar img {
+    height: 4em;
+    border-radius: 10% 35%;
+}
+
+.about::before {
+    content: '>>> ';
+    font-weight: bold;
+}
