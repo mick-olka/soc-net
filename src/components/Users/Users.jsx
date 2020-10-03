@@ -14,10 +14,6 @@ const Music = () => {
         <div className={s.item}>user</div>
         <div className={s.item}>user</div>
         <div className={s.item}>user</div>
-        <div className={s.item}>user</div>
-        <div className={s.item}>user</div>
-        <div className={s.item}>user</div>
-        <div className={s.item}>user</div>
       </div>
     </div>
   );
