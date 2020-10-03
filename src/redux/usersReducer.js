@@ -6,5 +6,6 @@ let initialState = {
         {id: 0, name: "And Nee"},
         {id: 0, name: "Eleez Maf"},
         {id: 0, name: "Poster Meter"},
+        {id: 0, name: "Sola Sire"},
     ]
 }
