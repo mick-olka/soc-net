@@ -1,6 +1,6 @@
 .header {
     grid-area: h;
-    background-color: green;
+    background-color: #bbbbbb;
     display: flex;
     justify-content: space-between;
     padding: 0 1em;
@@ -19,4 +19,8 @@
     margin: auto 0;
     height: 2em;
     background-color: white;
+}
+
+.loginBlock{
+    margin: auto 0rem;
 }

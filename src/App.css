@@ -10,7 +10,8 @@
 
 .app-wrapper-content {
     grid-area: c;
-    background-color: cornflowerblue;
+    background-color: #3c4317;
+    color: navajowhite;
 }
 
 .content{

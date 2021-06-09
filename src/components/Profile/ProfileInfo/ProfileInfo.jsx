@@ -1,25 +1,25 @@
 import React from "react";
-
+import ava from '../../../img/Avatar.png';
 import s from "./ProfileInfo.module.css";
+import Preloader from "../../common/Preloader/Preloader";
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
+
+    if (!props.profile) {
+        return (<Preloader/>);
+    }
   return (
     <div className={s.content}>
       <div className={s.avatar}>
-        <img alt='ava' src={null}
-        // {props.avatar} 
-        />
+        <img alt='ava' src={props.profile.photos.large? props.profile.photos.large : ava}/>
       </div>
 
       <div className={s.info}>
         <p className={s.profile_name}>
-          {/* {props.profile_name} */}
-          MYNAME
+            {props.profile.fullName}
           </p>
-        <span className={s.about}>
-          {/* {props.info} */}
-          INFO INFO INFP
-          </span>
+          <ProfileStatus status={props.profile.aboutMe} />
       </div>
     </div>
   );

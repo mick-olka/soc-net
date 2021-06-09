@@ -1,6 +1,8 @@
+import {profileAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const SET_USER_PROFILE = 'SET_USER_PROFILE'
 
 let initialState = {
       profileInfo: { id: 0, name: "Mick", info: "Leet Meee Out!" },
@@ -41,13 +43,14 @@ let initialState = {
           },
           { id: 16, author: "Mick", likes: 51, message: "Leet mtttttt ouy;" },
         ],
+    profile: null,
   };
 
 const profileReducer = (state=initialState, action) => {
   let stateCopy;
     switch (action.type) {
-        case ADD_POST: 
-        
+
+        case ADD_POST:
             let newPost = {
                 id: 25,
                 message: state.newPostText,
@@ -59,11 +62,13 @@ const profileReducer = (state=initialState, action) => {
               stateCopy.posts=[...state.posts, newPost];
             return stateCopy;
             
-        case UPDATE_NEW_POST_TEXT: 
-
+        case UPDATE_NEW_POST_TEXT:
             stateCopy={...state};  //дані отримані з ActionCreator в MyPosts
             stateCopy.newPostText=action.text;
             return stateCopy;
+
+        case SET_USER_PROFILE:
+            return {...state, profile: action.profile }
 
         default:
             return state;
@@ -72,6 +77,15 @@ const profileReducer = (state=initialState, action) => {
 
 //ACTION CREATORS
 export const addPostCreator = () => ({type: ADD_POST});
+export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const updateNewPostTextCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, text: text});
+
+export const setProfile = (userId) => {
+    return (dispatch) => {
+        profileAPI.getProfile(userId).then(response => {
+            dispatch(setUserProfile(response));
+        });
+    }
+}
 
 export default profileReducer;

@@ -1,37 +1,28 @@
 import React from "react";
 import "./App.css";
-import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import Profile from "./components/Profile/Profile";
 import { Route } from "react-router-dom";
 import News from "./components/News/News";
-import Users from "./components/Users/Users";
+import UsersContainer from "./components/Users/UsersContainer";
 import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
-
-
+import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 const App = () => {
-
-  let FuncProfile = () => <Profile 
-  // profilePage={props.state.profilePage} 
-  />;
-  let FuncDialogs = () => <DialogsContainer />;
-  let FuncNews = () => <News/>;
-  let FuncMusic = () => <Users/>;
-  let FuncSettings = () => <Settings/>;
-
   return (
 
       <div className="app-wrapper">
-        <Header />
+        <HeaderContainer />
         <Navbar />
         <div className="app-wrapper-content">
-          <Route path="/profile" render={FuncProfile} />
-          <Route path="/dialogs" render={FuncDialogs} />
-          <Route exact path="/" render={FuncNews} />
-          <Route path="/users" render={FuncMusic} />
-          <Route path="/settings" render={FuncSettings} />
+          <Route path="/profile/:userId?" render={() => <ProfileContainer  />} />
+          <Route path="/dialogs" render={() => <DialogsContainer />} />
+          <Route exact path="/" render={() => <News/>} />
+          <Route path="/users" render={() => <UsersContainer/>} />
+          <Route path="/settings" render={() => <Settings/>} />
+          <Route path="/login" render={() => <Login/>} />
         </div>
       </div>
 
