@@ -64,16 +64,16 @@ export const toggleFollowDone = (userId) => ({type: TOGGLE_FOLLOW, userId});
 export const setUsers = (users) => ({type: SET_USERS, users});
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
 export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, count: totalUsersCount});
-export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
+export const setIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 export const toggleFollowFetching = (isFetching, userId) => ({type: FOLLOW_FETCHING, isFetching, userId});
 
 export const getUsers = (currentPage, pageSize) => { // THUNK CREATOR
 
   return (dispatch) => {    // THUNK
 
-    dispatch(toggleIsFetching(true));
+    dispatch(setIsFetching(true));
     usersAPI.getUsers(currentPage, pageSize).then(response => {
-      dispatch(toggleIsFetching(false));
+      dispatch(setIsFetching(false));
       dispatch(setUsers(response.items));
       dispatch(setTotalUsersCount(response.totalCount));
     });

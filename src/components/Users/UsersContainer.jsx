@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import {
     toggleFollow,
-    getUsers, setCurrentPage
+    getUsers, setCurrentPage, setIsFetching
 } from '../../redux/usersReducer';
 import React from "react";
 import Users from "./Users";
@@ -13,12 +13,13 @@ import {compose} from "redux";
 class UsersContainer extends React.Component {
 
     componentDidMount() {
+        console.log("did mount");
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.getUsers(pageNumber, this.props.pageSize);
         this.props.setCurrentPage(pageNumber);
+        this.props.getUsers(pageNumber, this.props.pageSize);
     }
 
     render() {
@@ -31,6 +32,7 @@ class UsersContainer extends React.Component {
                 onPageChanged={this.onPageChanged}
                 toggleFollow={this.props.toggleFollow}
                 isFollowFetching={this.props.isFollowFetching}
+                isFetching={this.props.isFetching}
             />}
         </>;
     }
@@ -43,6 +45,7 @@ let mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFollowFetching: state.usersPage.isFollowFetching,
+        isFetching: state.usersPage.isFetching,
     }
 }
 
@@ -53,6 +56,7 @@ export default compose (
         toggleFollow,
         setCurrentPage,
         getUsers,
+        setIsFetching
     }),
     WithAuthRedirect
 )(UsersContainer);

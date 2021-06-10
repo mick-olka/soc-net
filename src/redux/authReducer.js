@@ -3,9 +3,9 @@ import {profileAPI} from "../api/api";
 const SET_AUTH_USER_DATA = "SET_AUTH_USER_DATA";
 
 let initialState = {
-  userId: null,
-  email: null,
-  login: null,
+    myId: null,
+    email: null,
+    login: null,
     isAuth: false,
 };
 
@@ -16,6 +16,7 @@ const authReducer = (state = initialState, action) => {
 
         return{
             ...state, ...action.data, isAuth: true,
+
         }
 
     default:
@@ -23,10 +24,10 @@ const authReducer = (state = initialState, action) => {
   }
 };
 
-export const setAuthUserData = (userId, email, login) => ({
+export const setAuthUserData = (myId, email, login) => ({
     type: SET_AUTH_USER_DATA,
-    data: {userId, email, login
-    }});
+    data: {myId, email, login}
+});
 
 export const setLogin = () => (dispatch) => {
         profileAPI.getAuth()

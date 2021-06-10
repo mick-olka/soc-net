@@ -5,7 +5,6 @@ const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 
 let initialState = {
-      profileInfo: { id: 0, name: "Mick", info: "Leet Meee Out!" },
       newPostText: 'write',
       posts: [
           { id: 0, author: "Mick", likes: 0, message: "IT''\"S MY FIRST POST!!!!" },
@@ -43,7 +42,11 @@ let initialState = {
           },
           { id: 16, author: "Mick", likes: 51, message: "Leet mtttttt ouy;" },
         ],
-    profile: null,
+    profile: {
+        aboutMe: null,
+        fullName: null,
+        userId: null,
+    },
   };
 
 const profileReducer = (state=initialState, action) => {

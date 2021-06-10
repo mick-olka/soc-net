@@ -10,9 +10,14 @@ class ProfileContainer extends React.Component {
 
     componentDidMount() {
         let userId = this.props.match.params.userId;
-        if (!userId) {userId=2;}
+        if (!userId) {userId=this.props.myId;}
         this.props.setProfile(userId);  //  setProfile from mdtp from connect
-        }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        let userId = this.props.match.params.userId;
+        if (!userId) {this.props.setProfile(this.props.myId);}  //  redirect to my profile if exact /profile/
+    }
 
     render() {
         return (<Profile {...this.props} />);
@@ -21,6 +26,7 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => ({     //  state comes from connect -- reduxState
     profile: state.profilePage.profile,
+    myId: state.auth.myId,
 });
 
 //let AuthRedirectComponent = WithAuthRedirect(ProfileContainer);     //  HOC

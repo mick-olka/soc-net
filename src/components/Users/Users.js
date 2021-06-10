@@ -13,7 +13,7 @@ let Users = (props) => {
         pages.push(i);
     }
 
-    return (
+    return <>
         <div className="content">
             <h1 id="heading">Worldwide</h1>
             <div className={s.pageIndex}>
@@ -44,7 +44,7 @@ let Users = (props) => {
                 ))}
             </div>
         </div>
-    );
+            </>
 }
 
 export default Users;

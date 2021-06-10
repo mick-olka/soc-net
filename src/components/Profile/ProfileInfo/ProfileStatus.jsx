@@ -1,11 +1,11 @@
 import React from "react";
 import s from "./ProfileInfo.module.css";
-import {render} from "react-dom";
 
 class ProfileStatus extends React.Component {
 
     state = {
         editMode: false,
+        status: "",
     }
 
     activateEditMode = () => {
@@ -20,20 +20,36 @@ class ProfileStatus extends React.Component {
         });
     }
 
+    updateLocalStatus = (data) => {
+        this.setState({
+            status: data,
+        });
+    }
+
+    componentDidMount() {
+        console.log(this.props.status);
+        if (this.props.status!==null) this.updateLocalStatus(this.props.status);
+    }
+
     render() {
+        let statusInput = React.createRef();
         return (
             <div>
                 {!this.state.editMode &&
                 <div>
                     <span className={s.about} onDoubleClick={this.activateEditMode}>
-                        {this.props.status}
+                        {this.state.status}
                     </span>
                 </div>
                 }
 
                 {this.state.editMode &&
                 <div>
-                    <input autoFocus={true} onBlur={this.deactivateEditMode} type="text" value={this.props.status}/>
+                    <input autoFocus={true} onBlur={this.deactivateEditMode} type="text"
+                        value={this.state.status}
+                        onChange={()=>this.updateLocalStatus(statusInput.current.value)}
+                        ref={statusInput}
+                    />
                 </div>
                     //  onBlur -- activates when clicked outside
                 }
