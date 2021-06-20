@@ -4,6 +4,7 @@ import {stopSubmit} from "redux-form";
 const SET_AUTH_USER_DATA = "SET_AUTH_USER_DATA";
 
 let initialState = {
+    initialized: false,
     myId: null,
     email: null,
     login: null,
@@ -40,6 +41,7 @@ export const getLogin = () => (dispatch) => {
 
                 }
         });
+        return "from getLogin";
     }
 
 export const doLogIn = (formData) => (dispatch) => {

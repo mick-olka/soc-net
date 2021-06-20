@@ -7,7 +7,6 @@ import {
     getProfileStatus,
     updateProfileStatus
 } from "../../redux/profileReducer";
-import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
 import Preloader from "../common/Preloader/Preloader";
 import {doLogOut} from "../../redux/authReducer";
@@ -36,6 +35,9 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
+        // console.log("RENDER ProfileC");
+        // console.log(this.props);
+
         if (!this.props.myId && !this.props.match.params.userId) {  //  if not authorised and go to /profile
             return <Redirect to='/login' />
         }
@@ -47,12 +49,15 @@ class ProfileContainer extends React.Component {
     }
 }
 
-let mapStateToProps = (state) => ({     //  state comes from connect -- reduxState
-    myId: state.auth.myId,
-    profile: state.profilePage.profile,
-    status: state.profilePage.status,
-    isFetching: state.usersPage.isFetching,
-});
+let mapStateToProps = (state) => {     //  state comes from connect -- reduxState
+    // console.log("MSTP ProfileC");
+    return ({
+        myId: state.auth.myId,
+        profile: state.profilePage.profile,
+        status: state.profilePage.status,
+        isFetching: state.usersPage.isFetching,
+    });
+};
 
 //let AuthRedirectComponent = WithAuthRedirect(ProfileContainer);     //  HOC
 //let ContainerComponentWithUrlData = withRouter(AuthRedirectComponent);   //  give AuthRedirectComponent HOC here

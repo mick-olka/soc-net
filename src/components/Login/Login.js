@@ -1,7 +1,6 @@
 import React from 'react';
 import ReduxLoginForm from "./LoginForm";
 import {Redirect} from "react-router-dom";
-import s from "./Login.module.css";
 
 const Login = (props) => {
 

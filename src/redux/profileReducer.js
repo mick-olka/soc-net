@@ -51,7 +51,7 @@ let initialState = {
         fullName:"loading",
         userId:null,
         photos:{small:null,large:null}},
-    status: "",
+    status: null,
   };
 
 const profileReducer = (state=initialState, action) => {
