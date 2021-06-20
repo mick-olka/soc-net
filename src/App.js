@@ -8,7 +8,8 @@ import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
+import NotFound from "./components/common/NotFound";
+import LoginContainer from "./components/Login/LoginContainer";
 
 const App = () => {
   return (
@@ -17,12 +18,13 @@ const App = () => {
         <HeaderContainer />
         <Navbar />
         <div className="app-wrapper-content">
-          <Route path="/profile/:userId?" render={() => <ProfileContainer  />} />
+          <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
           <Route path="/dialogs" render={() => <DialogsContainer />} />
           <Route exact path="/" render={() => <News/>} />
           <Route path="/users" render={() => <UsersContainer/>} />
           <Route path="/settings" render={() => <Settings/>} />
-          <Route path="/login" render={() => <Login/>} />
+          <Route path="/login" render={() => <LoginContainer />} />
+          <Route path="/error" render={() => <NotFound/>} />
         </div>
       </div>
 

@@ -11,7 +11,7 @@ let initialState = {
   users: [],
   pageSize:20,
   TotalUsersCount: 0,
-  currentPage: 1,
+  currentPage: 633,
   isFetching: false,
   isFollowFetching: [],
   creatures: [],
@@ -68,14 +68,12 @@ export const setIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetch
 export const toggleFollowFetching = (isFetching, userId) => ({type: FOLLOW_FETCHING, isFetching, userId});
 
 export const getUsers = (currentPage, pageSize) => { // THUNK CREATOR
-
   return (dispatch) => {    // THUNK
-
     dispatch(setIsFetching(true));
     usersAPI.getUsers(currentPage, pageSize).then(response => {
-      dispatch(setIsFetching(false));
       dispatch(setUsers(response.items));
       dispatch(setTotalUsersCount(response.totalCount));
+      dispatch(setIsFetching(false));
     });
   }
 }

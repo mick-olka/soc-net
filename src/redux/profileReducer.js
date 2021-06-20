@@ -1,11 +1,12 @@
 import {profileAPI} from "../api/api";
+import {setIsFetching} from "./usersReducer";
 
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
-const SET_USER_PROFILE = 'SET_USER_PROFILE'
+const ADD_POST = 'ADD-POST';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS';
 
 let initialState = {
-      newPostText: 'write',
+    isFetching: true,
       posts: [
           { id: 0, author: "Mick", likes: 0, message: "IT''\"S MY FIRST POST!!!!" },
           {
@@ -44,9 +45,13 @@ let initialState = {
         ],
     profile: {
         aboutMe: null,
-        fullName: null,
-        userId: null,
-    },
+        contacts:{facebook:null,website:null,vk:null,twitter:null,instagram:null,youtube:null,github:null,mainLink:null},
+        lookingForAJob:false,
+        lookingForAJobDescription:null,
+        fullName:"loading",
+        userId:null,
+        photos:{small:null,large:null}},
+    status: "",
   };
 
 const profileReducer = (state=initialState, action) => {
@@ -56,22 +61,18 @@ const profileReducer = (state=initialState, action) => {
         case ADD_POST:
             let newPost = {
                 id: 25,
-                message: state.newPostText,
+                message: action.newPostText,
                 likes: 0,
                 author: "Mick"
               };
-              stateCopy={...state,
-              newPostText: ''};
-              stateCopy.posts=[...state.posts, newPost];
-            return stateCopy;
-            
-        case UPDATE_NEW_POST_TEXT:
-            stateCopy={...state};  //дані отримані з ActionCreator в MyPosts
-            stateCopy.newPostText=action.text;
+              stateCopy={...state, posts: [...state.posts, newPost]};
             return stateCopy;
 
         case SET_USER_PROFILE:
             return {...state, profile: action.profile }
+
+        case SET_PROFILE_STATUS:
+            return {...state, status: action.status}
 
         default:
             return state;
@@ -79,14 +80,33 @@ const profileReducer = (state=initialState, action) => {
 }
 
 //ACTION CREATORS
-export const addPostCreator = () => ({type: ADD_POST});
+export const addPostCreator = (newPostText) => ({type: ADD_POST, newPostText});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
-export const updateNewPostTextCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, text: text});
+const setStatus = (status) => ({type: SET_PROFILE_STATUS, status: status});
 
-export const setProfile = (userId) => {
+export const getProfile = (userId) => {
     return (dispatch) => {
+        dispatch(setIsFetching(true));
         profileAPI.getProfile(userId).then(response => {
             dispatch(setUserProfile(response));
+            dispatch(setIsFetching(false));
+        });
+    }
+}
+
+export const getProfileStatus = (userId) => {
+    return (dispatch) => {
+        profileAPI.getStatus(userId).then(response => {
+            dispatch(setStatus(response.data));
+        });
+    }
+}
+
+export const updateProfileStatus = (status) => {
+    return (dispatch) => {
+        profileAPI.updateStatus(status).then(response => {
+            if (response.data.resultCode === 0)
+                dispatch(setStatus(status));
         });
     }
 }

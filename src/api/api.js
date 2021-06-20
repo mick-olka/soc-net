@@ -4,9 +4,37 @@ const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
-        "API-KEY": "a9d0f966-c2f4-474b-8c98-710627b53d18"
+        //"API-KEY": "a9d0f966-c2f4-474b-8c98-710627b53d18"
+        "API-KEY": "adfa0f80-bb2b-49f6-99e1-2fc8e9795f73"
     }
 });
+
+export const authAPI = {
+    getAuth () {
+        return instance.get(
+            'auth/me',
+        ).then(response => {
+            return response;
+        });
+    },
+
+    logIn (formData) {
+        return instance.post(
+            'auth/login',
+            {email: formData.email, password: formData.password, rememberMe: formData.rememberMe}
+        ).then(response => {
+            return response;
+        });
+    },
+
+    logOut() {
+        return instance.delete(
+            'auth/login'
+        ).then(response => {
+            return response;
+        });
+    }
+}
 
 export const usersAPI = {
     getUsers (currentPage=1, pageSize=10) {
@@ -44,11 +72,22 @@ export const profileAPI = {
     },
 
     getAuth () {
-        return instance.get(
-            'auth/me',
-            ).then(response => {
-            return response;
-        });
-    }
+        console.warn("Obsolete method. use authAPI");
+        return authAPI.getAuth();
+
+        // return instance.get(
+        //     'auth/me',
+        //     ).then(response => {
+        //     return response;
+        // });
+    },
+
+    getStatus(userId) {
+        return instance.get('profile/status/'+userId);
+    },
+
+    updateStatus(status) {
+        return instance.put('profile/status/', {status: status});
+    },
 
 }

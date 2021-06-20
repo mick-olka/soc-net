@@ -3,9 +3,9 @@ import { Redirect } from "react-router-dom";
 
 import s from "./Dialogs.module.css";
 
-import TextareaAutosize from "react-textarea-autosize";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import ReduxNewMessageForm from "./NewMessageForm";
 
 const Dialogs = (props) => {
 
@@ -15,15 +15,18 @@ const Dialogs = (props) => {
 
   let messagesElements = props.dialogsPage.messages.map((m) => <Message message={m.message} key={m.id} />);
 
-  let newMessageElement = React.createRef();
-
-  let onMessageChange = () => {
-    props.updateNewMessageBodyCreator(newMessageElement.current.value);
+  const onSubmit = (formData) => {
+      props.sendMessageCreator(formData.messageText);
+      formData.messageText="";
   }
-
-  let sendMessage =()=>{
-    props.sendMessageCreator();
-  }
+  //
+  // let onMessageChange = () => {
+  //   props.setNewMessageBodyCreator('newMessageElement.current.value');
+  // }
+  //
+  // let sendMessage =()=>{
+  //   props.sendMessageCreator();
+  // }
 
   if (props.isAuth === false) return <Redirect to={"/login"} />
   //alert(props.isAuth);
@@ -45,18 +48,7 @@ const Dialogs = (props) => {
           </div>
 
           {messagesElements}
-          <div className={s.textInputBlock}>
-            <TextareaAutosize
-              maxRows="3"
-              className={s.textInput}
-              onChange={onMessageChange}
-              type="text"
-              ref={newMessageElement}
-              value={props.dialogsPage.newMessageBody}
-              placeholder='Message'
-            />
-            <button onClick={sendMessage}>Sent</button>
-          </div>
+          < ReduxNewMessageForm onSubmit={onSubmit} />
         </div>
       </div>
     </div>

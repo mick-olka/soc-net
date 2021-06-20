@@ -14,6 +14,10 @@ const Profile = (props) => {
       <div className="content">
         <ProfileInfo
           profile={props.profile}
+          status={props.status}
+          myId={props.myId}
+          updateProfileStatus={props.updateProfileStatus}
+          doLogOut={props.doLogOut}
         />
         <MyPostsContainer/>
       </div>

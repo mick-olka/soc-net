@@ -1,7 +1,6 @@
 
 import {
   sendMessageCreator,
-  updateNewMessageBodyCreator,
 } from "../../redux/dialogsReducer";
 
 import Dialogs from "./Dialogs";
@@ -14,22 +13,9 @@ let mapStateToProps = (state) => {
     dialogsPage: state.dialogsPage,
   }
 }
-//
-// let mapDispatchToProps = (dispatch) => {
-//   return{
-//     updateNewMessageBody: (body)=>{   // body comes from function call in Dialogs.jsx
-//       dispatch(updateNewMessageBodyCreator(body));
-//     },
-//     sendMessage: ()=>{
-//       dispatch(sendMessageCreator())
-//     },
-//   }
-// }
-//let AuthRedirectComponent = WithAuthRedirect(Dialogs);
-//const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 
 export default compose(
-    connect(mapStateToProps, {updateNewMessageBodyCreator, sendMessageCreator}),
+    connect(mapStateToProps, {sendMessageCreator}),
     WithAuthRedirect
 )(Dialogs);
 

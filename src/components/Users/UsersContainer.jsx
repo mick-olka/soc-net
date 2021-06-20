@@ -13,7 +13,6 @@ import {compose} from "redux";
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        console.log("did mount");
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
 
@@ -58,5 +57,5 @@ export default compose (
         getUsers,
         setIsFetching
     }),
-    WithAuthRedirect
+    //WithAuthRedirect
 )(UsersContainer);

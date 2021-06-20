@@ -1,35 +1,22 @@
 import React from "react";
 import s from "./MyPosts.module.css";
 import Post from "../../Post/Post";
+import ReduxNewPostForm from "./NewPostForm";
 
 const MyPosts = (props) => {
-  let newPostElement = React.createRef();
 
   let postElements = props.posts.map((i) => (
     <Post likes={i.likes} message={i.message} key={i.id} />
   ));
 
-  let onPostChange = () => {
-    props.onPostChange(newPostElement.current.value);
-  };
-
-  let addPost = () => {
-    props.addPost();
-  };
+    const onSubmit = (formData) => {    //  calls from redux-form in handleSumbit
+        props.addPostCreator(formData.postText);
+        formData.postText="";
+    }
 
   return (
     <div className={s.content}>
-      <div className={s.write_post}>
-        <textarea
-          className="newPostTextarea"
-          onChange={onPostChange}
-          ref={newPostElement}
-          value={props.newPostText}
-        />
-        <button className={s.addPostButton} onClick={addPost}>
-          Add post
-        </button>
-      </div>
+      <ReduxNewPostForm onSubmit={onSubmit} />
 
       <div className={s.posts}>
         <p>My posts</p>
