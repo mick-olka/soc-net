@@ -35,22 +35,17 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
-        // console.log("RENDER ProfileC");
-        // console.log(this.props);
-
         if (!this.props.myId && !this.props.match.params.userId) {  //  if not authorised and go to /profile
             return <Redirect to='/login' />
         }
         if (this.props.isFetching) {
             return (<Preloader/>);
         }
-        //console.log("container render");
         return (<Profile {...this.props} />);
     }
 }
 
 let mapStateToProps = (state) => {     //  state comes from connect -- reduxState
-    // console.log("MSTP ProfileC");
     return ({
         myId: state.auth.myId,
         profile: state.profilePage.profile,

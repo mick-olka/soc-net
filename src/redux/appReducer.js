@@ -4,6 +4,7 @@ const SET_INITIALIZED_DONE = "SET_AUTH_USER_DATA";
 
 let initialState = {
     initialized: false,
+    testCount: 0,
 };
 
 const appReducer = (state = initialState, action) => {
@@ -13,6 +14,12 @@ const appReducer = (state = initialState, action) => {
           return {
               ...state,
               initialized: true,
+          }
+
+      case "TEST":
+          return {
+              ...state,
+              testCount: state.testCount+1,
           }
 
     default:

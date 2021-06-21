@@ -10,6 +10,10 @@ import { Provider } from "react-redux";
 
 // window.state=store.getState();
 
+setInterval(()=>{
+    store.dispatch({type: "TEST"});
+}, 1000);
+
   ReactDOM.render(
     <BrowserRouter>
     <Provider store={store}>

@@ -1,5 +1,6 @@
+import {createSelector} from "reselect";
 
-export const getUsersState = (state) => {
+const getUsersState = (state) => {
     return state.usersPage.users;
 }
 
@@ -22,3 +23,8 @@ export const getIsFollowFetchingState = (state) => {
 export const getIsFetching = (state) => {
     return state.usersPage.isFetching;
 }
+
+export const getUsersStateReselector = createSelector(getUsersState, getIsFetching, (users, isFetching)=> {
+    return users.filter(u => true);
+});
+
