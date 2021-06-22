@@ -2,6 +2,7 @@ import React from "react";
 import ava from '../../../img/Avatar.png';
 import s from "./ProfileInfo.module.css";
 import ProfileStatus from "./ProfileStatus";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 const ProfileInfo = (props) => {
 
@@ -15,7 +16,7 @@ const ProfileInfo = (props) => {
         <p className={s.profile_name}>
             {props.profile.fullName}
           </p>
-          <ProfileStatus
+          <ProfileStatusWithHooks
               status={props.status}
               profileId={props.profile.userId}
               myId={props.myId}
