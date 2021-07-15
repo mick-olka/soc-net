@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
-import {Route, withRouter} from "react-router-dom";
+import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import News from "./components/News/News";
 import UsersContainer from "./components/Users/UsersContainer";
 import Settings from "./components/Settings/Settings";
@@ -10,10 +10,11 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import NotFound from "./components/common/NotFound";
 import LoginContainer from "./components/Login/LoginContainer";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
+import store from "./redux/reduxStore";
 
 class App extends React.Component {
 
@@ -22,11 +23,11 @@ class App extends React.Component {
     }
 
     render() {
-        if (!this.props.initialized) return <Preloader />
-
+        if (!this.props.initialized) return <Preloader/>
         return (
+
             <div className="app-wrapper">
-                <HeaderContainer />
+                <HeaderContainer/>
                 <Navbar/>
                 <div className="app-wrapper-content">
                     <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
@@ -48,9 +49,20 @@ const mapStateToProps = (state) => ({
     initialized: state.app.initialized,
 });
 
-export default compose(
+let AppContainer = compose(
     withRouter,     //  needs withRouter cause connect bugs Routes
     connect(mapStateToProps, {initializeApp})
 )(App);
 
-//export default App;
+
+let AppWrapper = (props) => {
+    return (
+        <BrowserRouter>
+            <Provider store={store}>
+                <AppContainer/>
+            </Provider>
+        </BrowserRouter>
+    );
+}
+
+export default AppWrapper;

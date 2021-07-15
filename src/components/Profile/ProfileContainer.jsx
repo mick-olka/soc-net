@@ -35,6 +35,7 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
+
         if (!this.props.myId && !this.props.match.params.userId) {  //  if not authorised and go to /profile
             return <Redirect to='/login' />
         }
@@ -61,7 +62,4 @@ export default compose(     //  what we get when redirecting to ProfileContainer
     connect(mapStateToProps,
         {getProfile, getProfileStatus, updateProfileStatus, doLogOut}), //  props.myId
     withRouter,         //  url data
-    //WithAuthRedirect,   //  props.isAuth
-    //WithPreloader,
-
 )(ProfileContainer);

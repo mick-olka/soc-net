@@ -3,25 +3,14 @@ import * as serviceWorker from "./serviceWorker";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
-import { BrowserRouter } from "react-router-dom";
-import store from "./redux/reduxStore";
-import { Provider } from "react-redux";
+import AppWrapper from "./App";
 
 // window.state=store.getState();
 
-setInterval(()=>{
-    store.dispatch({type: "TEST"});
-}, 1000);
-
-  ReactDOM.render(
-    <BrowserRouter>
-    <Provider store={store}>
-      <App/>
-      </Provider>
-    </BrowserRouter>,
+ReactDOM.render(
+    <AppWrapper /> ,
     document.getElementById("root")
-  );
+);
 
 
 // If you want your app to work offline and load faster, you can change

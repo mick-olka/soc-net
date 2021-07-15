@@ -2,11 +2,10 @@
 import { connect } from 'react-redux';
 import {
     toggleFollow,
-    getUsers, setCurrentPage, setIsFetching
+    getUsers, setCurrentPage, setIsFetching, setPortionNum
 } from '../../redux/usersReducer';
 import React from "react";
-import Users from "./Users";
-import Preloader from "../common/Preloader/Preloader";
+import UsersList from "./UsersList";
 import {compose} from "redux";
 import {
     getCurrentPageState, getIsFetching, getIsFollowFetchingState,
@@ -26,30 +25,34 @@ class UsersContainer extends React.Component {
         this.props.getUsers(pageNumber, this.props.pageSize);
     }
 
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return  !nextProps.isFetching || this.props.currentPage!==nextProps.currentPage;
+    }
+
     render() {
-        console.log("RENDER UsersC");
-        return <>
-            {this.props.isFetching ? <Preloader /> : <Users
+        console.log("RENDER UsersC with fetching: "+this.props.isFetching);
+        return <UsersList
                 totalUsersCount={this.props.totalUsersCount}
                 pageSize={this.props.pageSize}
                 currentPage={this.props.currentPage}
+                portionNum={this.props.portionNum}
+                setPortionNum={this.props.setPortionNum}
                 users={this.props.users}
                 onPageChanged={this.onPageChanged}
                 toggleFollow={this.props.toggleFollow}
                 isFollowFetching={this.props.isFollowFetching}
                 isFetching={this.props.isFetching}
-            />}
-        </>;
+            />;
     }
 }
 
 let mapStateToProps = (state) => {
-    console.log("MSTP UsersC");
     return{
         users: getUsersStateReselector(state),
         pageSize: getPageSizeState(state),
         totalUsersCount: getTotalUsersCountState(state),
         currentPage: getCurrentPageState(state),
+        portionNum: state.usersPage.portionNum,
         isFollowFetching: getIsFollowFetchingState(state),
         isFetching: getIsFetching(state),
     }
@@ -62,7 +65,8 @@ export default compose (
         toggleFollow,
         setCurrentPage,
         getUsers,
-        setIsFetching
+        setIsFetching,
+        setPortionNum,
     }),
     //WithAuthRedirect
 )(UsersContainer);

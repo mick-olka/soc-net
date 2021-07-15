@@ -9,12 +9,3 @@
     max-width: 4rem;
     border-radius: 10% 30%;
 }
-
-.pageIndex span{
-    display: inline-block;
-    padding: 0.5rem;
-}
-
-.selectedPage{
-    font-weight: bolder;
-}

@@ -1,6 +1,6 @@
 import {getLogin} from "./authReducer";
 
-const SET_INITIALIZED_DONE = "SET_AUTH_USER_DATA";
+const SET_INITIALIZED_DONE = "soc-net/auth/app-reducer/SET_INIT_DONE";
 
 let initialState = {
     initialized: false,

@@ -2,15 +2,15 @@ import React from 'react';
 import ReduxLoginForm from "./LoginForm";
 import {Redirect} from "react-router-dom";
 
-const Login = (props) => {
+const Login = ({setLogin, isAuth}) => {
 
     const onSubmit = (formData) => {    //  calls from redux-form in handleSumbit
         console.log(formData);
         //authAPI.setAuth(formData);
-        props.setLogin(formData);
+        setLogin(formData);
     }
 
-    if (props.isAuth) {
+    if (isAuth) {
         return <Redirect to={'/profile'} />
     }
 
