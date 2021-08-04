@@ -5,6 +5,11 @@
 
 .info {
     margin-left: 1em;
+    flex: 20rem;
+}
+
+.contact{
+
 }
 
 .profile_name {

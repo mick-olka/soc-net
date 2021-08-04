@@ -10,7 +10,7 @@ const instance = axios.create({
 });
 
 export const authAPI = {
-    getAuth () {
+    getAuth() {
         return instance.get(
             'auth/me',
         ).then(response => {
@@ -18,10 +18,10 @@ export const authAPI = {
         });
     },
 
-    logIn (formData) {
+    logIn(formData) {
         return instance.post(
             'auth/login',
-            {email: formData.email, password: formData.password, rememberMe: formData.rememberMe}
+            {email: formData.email, password: formData.password, rememberMe: formData.rememberMe, captcha: formData.captcha}
         ).then(response => {
             return response;
         });
@@ -37,23 +37,23 @@ export const authAPI = {
 }
 
 export const usersAPI = {
-    getUsers (currentPage=1, pageSize=10) {
-    return instance.get(
-        `users?page=${currentPage}&count=${pageSize}`,
+    getUsers(currentPage = 1, pageSize = 10) {
+        return instance.get(
+            `users?page=${currentPage}&count=${pageSize}`,
         ).then(response => {
-        return response.data;
-    });
-},
+            return response.data;
+        });
+    },
 
-    followUser (id) {
+    followUser(id) {
         return instance.post(
             `follow/${id}`, {},
-            ).then(response => {
+        ).then(response => {
             return response.data.resultCode;
         });
     },
 
-    unfollowUser (id) {
+    unfollowUser(id) {
         return instance.delete(
             `follow/${id}`,
         ).then(response => {
@@ -63,15 +63,15 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
-    getProfile (userId) {
+    getProfile(userId) {
         return instance.get(
             `profile/` + userId,
-            ).then(response => {
+        ).then(response => {
             return response.data;
         });
     },
 
-    getAuth () {
+    getAuth() {
         console.warn("Obsolete method. use authAPI");
         return authAPI.getAuth();
 
@@ -82,12 +82,32 @@ export const profileAPI = {
         // });
     },
 
+    pushPhoto(file) {
+        let formData = new FormData();
+        formData.append("image", file);
+        return instance.put('profile/photo', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+    },
+
+    updateProfile(profile) {
+      return instance.put('profile', profile);
+    },
+
     getStatus(userId) {
-        return instance.get('profile/status/'+userId);
+        return instance.get('profile/status/' + userId);
     },
 
     updateStatus(status) {
         return instance.put('profile/status/', {status: status});
     },
 
+}
+export const securityAPI = {
+
+    getCaptchaUrl() {
+        return instance.get('security/get-captcha-url');
+    }
 }

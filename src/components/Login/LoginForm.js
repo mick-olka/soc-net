@@ -1,12 +1,12 @@
 import React from 'react';
 import {reduxForm} from "redux-form";
-import {createField, TextInput} from "../common/FormsControllers/FormController";
+import {createField, Input, TextInput} from "../common/FormsControllers/FormController";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 import s from "./Login.module.css";
 
 const maxLength50 = maxLengthCreator(50);
 
-const LoginForm = ({handleSubmit, error}) => {
+const LoginForm = ({handleSubmit, error, captchaUrl}) => {
     return (
         <form onSubmit={handleSubmit}>
             {error && <div className={s.form_error}>{error}</div>}
@@ -30,6 +30,10 @@ const LoginForm = ({handleSubmit, error}) => {
             <div>
                 <button>Let me in</button>
             </div>
+
+            {captchaUrl && <img src={captchaUrl} alt="captcha"/>}
+            {captchaUrl && createField("CaptchaSymbols", "captcha", [required], Input, {} )}
+
         </form>
     );
 }

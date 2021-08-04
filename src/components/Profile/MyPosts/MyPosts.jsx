@@ -5,8 +5,6 @@ import ReduxNewPostForm from "./NewPostForm";
 
 const MyPosts = React.memo((props) => {
 
-    console.log(props);
-
     let postElements = [...props.posts].reverse().map((i) => (      //  need copy by ...[] to save immutability
         <Post likes={i.likes} message={i.message} key={i.id}/>
     ));

@@ -25,6 +25,11 @@ export const TextInput = (props) => {  //  деструктуризация
     return <FormControl {...props} ><input type={"text"} {...input} {...restProps} /></FormControl>
 };
 
+export const Input = (props) => {  //  деструктуризация
+    const {input, meta, child, ...restProps} = props;
+    return <FormControl {...props} ><input {...input} {...restProps} /></FormControl>
+};
+
 export const createField = (placeholder, name, validator, component, props) => (
   <Field placeholder={placeholder} name={name} validate={validator} component={component} {...props} />
 );

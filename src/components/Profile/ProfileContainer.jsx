@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {Redirect, withRouter} from "react-router-dom";
 import {
     getProfile,
-    getProfileStatus,
+    getProfileStatus, savePhoto, saveProfile,
     updateProfileStatus
 } from "../../redux/profileReducer";
 import {compose} from "redux";
@@ -42,7 +42,7 @@ class ProfileContainer extends React.Component {
         if (this.props.isFetching) {
             return (<Preloader/>);
         }
-        return (<Profile {...this.props} />);
+        return (<Profile {...this.props} isOwner={!this.props.match.params.userId} />);
     }
 }
 
@@ -60,6 +60,6 @@ let mapStateToProps = (state) => {     //  state comes from connect -- reduxStat
 
 export default compose(     //  what we get when redirecting to ProfileContainer in App.js
     connect(mapStateToProps,
-        {getProfile, getProfileStatus, updateProfileStatus, doLogOut}), //  props.myId
+        {getProfile, getProfileStatus, updateProfileStatus, doLogOut, savePhoto, saveProfile}), //  props.myId
     withRouter,         //  url data
 )(ProfileContainer);

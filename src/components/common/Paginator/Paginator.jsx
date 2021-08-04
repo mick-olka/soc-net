@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import s from "./Paginator.module.css";
 
 function Paginator({totalItemsCount, pageSize, onPageChanged, currentPage, portionSize, portionNum, setPortionNum}) {

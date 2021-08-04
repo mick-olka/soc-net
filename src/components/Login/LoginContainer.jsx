@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {doLogOut, doLogIn} from "../../redux/authReducer";
+import {doLogOut, setLogin} from "../../redux/authReducer";
 import Login from "./Login";
 
 class LoginContainer extends React.Component {
@@ -13,6 +13,7 @@ class LoginContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth,
+    captchaUrl: state.auth.captchaUrl,
 });
 
-export default connect(mapStateToProps, {setLogin: doLogIn, deleteLogin: doLogOut})(LoginContainer);
+export default connect(mapStateToProps, {setLogin, deleteLogin: doLogOut})(LoginContainer);
