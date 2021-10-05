@@ -9,8 +9,7 @@ let UsersList = (props) => {
         return <User key={u.id} user={u} isFollowFetching={props.isFollowFetching} toggleFollow={props.toggleFollow} />
 });
 
-    return <>
-        <div className="content">
+    return <div className="content">
             <h1 id="heading">Worldwide</h1>
             <Paginator
             totalItemsCount={props.totalUsersCount}
@@ -25,8 +24,7 @@ let UsersList = (props) => {
             {/*{props.isFetching ? <div className="list">*/}
             {/*    {usersList}*/}
             {/*</div> : <Preloader/>}*/}
-        </div>
-            </>
+        </div>;
 }
 
 export default UsersList;
